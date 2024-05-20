@@ -1,5 +1,4 @@
 import random
-
 import ioFunctions
 import neuron
 import numpy as np
@@ -109,7 +108,7 @@ class MLP():
             self.updating_weights(weight, bias)
 
         if stats is not None:
-            ioFunctions.writeStats("stats", "Correct predicitons: " + str(correct_train_predictions) + " Epoch error: " + str(valid_error))
+            ioFunctions.writeStats("stats", "Correct predictions: " + str(correct_train_predictions) + " Epoch error: " + str(valid_error))
 
         return valid_error
 
