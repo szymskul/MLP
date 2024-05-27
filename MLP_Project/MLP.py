@@ -52,7 +52,6 @@ class MLP():
         weight_grads.append(result)
         bias_grads.append(last_layer_grad)
         for layer in reversed(self.layers[:-1]):
-            layer_derivative = np.array([neuron.derivSigmoid(neuron.output) for neuron in layer])
             last_layer_weights = np.array([neuron.weights for neuron in last_layer])
             error = np.array([np.dot(grad_above[:, i], last_layer_weights[:, i]) for i, neuron in enumerate(layer)])
             error2 = np.array([error[i] * neuron.derivSigmoid(neuron.output) for i, neuron in enumerate(layer)])
@@ -130,13 +129,14 @@ class MLP():
                 correct_train_predictions += 1
             weight_grad, bias_grad = self.backPropagation(data[1])
             valid_error += self.count_error(data[1])
+
             self.updating_weights(learning_rate, momentum, bias_grad, weight_grad, prev_bias, prev_weight, bias)
             prev_weight, prev_bias = weight_grad, bias_grad
 
         if stats is not None:
             ioFunctions.writeStats("stats", "Correct predictions: " + str(correct_train_predictions) + " Epoch error: " + str(valid_error))
 
-        return prev_weight, prev_bias, valid_error, correct_train_predictions/4
+        return prev_weight, prev_bias, valid_error, correct_train_predictions/len(data_set)
 
 
     def test(self, test_set, fileName, which_data_set):
@@ -203,4 +203,3 @@ class MLP():
         print("\nPrecyzja (Precision):", precision)
         print("Czułość (Recall):", recall)
         print("Miara F (F-measure):", f_measure)
-

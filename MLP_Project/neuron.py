@@ -3,9 +3,9 @@ import numpy as np
 
 class neuron():
 
-    def __init__(self, input_values_number, input_values=None, weights=None, biasTrue=None):
+    def __init__(self, input_values_number, weights=None, biasTrue=None):
         self.input_values_number = input_values_number
-        self.input_values = input_values
+        self.input_values = None
         if weights is None:
             self.weights = np.random.uniform(-1,1, size=input_values_number)
         else:

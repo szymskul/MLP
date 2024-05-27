@@ -57,11 +57,17 @@ while exitValue == False:
 
     if choose1 == 1:
         hidden_layer_neurons = []
-        input_layer_size = int(input("Enter the input layer size"))
-        hidden_layer_size = int(input("Enter the hidden layer size"))
+        if choose == 1:
+            input_layer_size = 4
+            output_layer_size = 3
+        elif choose == 2:
+            input_layer_size = 4
+            output_layer_size = 4
+        else:
+            raise ValueError("Invalid choice")
+        hidden_layer_size = int(input("Enter the hidden layer size: "))
         for i in range(hidden_layer_size):
-            hidden_layer_neurons.append(int(input("Enter the number of neurons on hidden layer")))
-        output_layer_size = int(input("Enter the output layer size"))
+            hidden_layer_neurons.append(int(input(f"Enter the number of neurons on hidden layer number {i+1} : ")))
         print("Add bias?")
         print("1. Yes")
         print("2. No")
@@ -79,10 +85,10 @@ while exitValue == False:
         print("2. Stop Value")
         choose3 = int(input("Enter your choice: "))
         if choose3 == 1:
-            epoch = int(input("Enter number of epoch"))
+            epoch = int(input("Enter number of epoch: "))
             stopValue = None
         elif choose3 == 2:
-            stopValue = float(input("Enter stopValue"))
+            stopValue = float(input("Enter stopValue: "))
             epoch = 0
         else:
             raise ValueError("Invalid choice")
@@ -97,8 +103,8 @@ while exitValue == False:
         else:
             raise ValueError("Invalid choice")
         learning_rate = float(input("Enter learning rate: "))
-        momentum = float(input("Enter momentum"))
-        train_error_list, correct_predictions_list, number_of_epoch = network.train(training_data, epoch, momentum, learning_rate, bias, shuffle=shuffle, stop_value=stopValue)
+        momentum = float(input("Enter momentum: "))
+        train_error_list, correct_predictions_list, number_of_epoch = network.train(data_set=training_data, number_of_epochs=epoch, momentum=momentum, learning_Rate=learning_rate, bias=bias, shuffle=shuffle, stop_value=stopValue)
         plt.figure(figsize=(12, 5))
 
         plt.subplot(1, 2, 1)
@@ -130,4 +136,5 @@ while exitValue == False:
         exitValue = True
     else:
         raise ValueError("Invalid choice")
+
 
