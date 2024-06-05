@@ -33,8 +33,8 @@ if choose == 1:
     target_values = np.array(target_values)
 
     combined_data = list(zip(values, target_values))
-    training_data = combined_data[0:35] + combined_data[50:85] + combined_data[100:135]
-    test_data = combined_data[35:50] + combined_data[85:100] + combined_data[135:150]
+    training_data = combined_data[0:20] + combined_data[50:70] + combined_data[100:120]
+    test_data = combined_data[20:50] + combined_data[70:100] + combined_data[120:150]
 elif choose == 2:
     x_array = np.array([[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]])
     y_array = np.array([[1,0,0,0], [0,1,0,0], [0,0,1,0], [0,0,0,1]])
@@ -112,6 +112,7 @@ while exitValue == False:
         plt.title('Błędy treningowe w zależności od liczby epok')
         plt.xlabel('Liczba epok')
         plt.ylabel('Błąd treningowy')
+        plt.ylim(0,1)
         plt.grid(True)
 
         plt.subplot(1, 2, 2)
@@ -119,6 +120,7 @@ while exitValue == False:
         plt.title('Dokładność w zależności od liczby epok')
         plt.xlabel('Liczba epok')
         plt.ylabel('Dokładność')
+        plt.ylim(0, 1)
         plt.grid(True)
 
         plt.tight_layout()
